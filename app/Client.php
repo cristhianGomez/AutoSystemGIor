@@ -9,4 +9,6 @@ class Client extends Model
     public function location(){
         return $this-> belongsTo(Location::class);
     }
+
+    protected $guarded = ['is_active'];
 }

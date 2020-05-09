@@ -8,6 +8,6 @@ use Illuminate\Support\Str;
 
 $factory->define(Location::class, function (Faker $faker) {
     return [
-        'name' => $faker->city,
+        'name' => $faker->unique()->city,
      ];
 });

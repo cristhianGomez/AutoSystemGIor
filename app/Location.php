@@ -9,4 +9,6 @@ class Location extends Model
     public function clients(){
         return $this-> hasMany(Client::class);
     }
+
+    protected $fillable= ['name'];
 }
