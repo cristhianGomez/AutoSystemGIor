@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Resources\ClientResource;
 use Illuminate\Support\Facades\Validator;
-
+use App\Http\Requests\StoreClientRequest as StoreClient;
 
 class ClientController extends Controller
 {
@@ -21,30 +21,17 @@ class ClientController extends Controller
     }
 
     //logica crear cliente
-    public function store(Request $request)
+    //la validaciòn es compleja asi que se creo una capa request
+    public function store(StoreClient $request) 
     {
-        $data = $request->all();
-        $validator = Validator::make($data, [
-            'name' => 'required|max:100',
-            'lastname' => 'required|max:100',
-            'phone' => 'required|max:30',
-            'email' => 'required|email|unique:clients',
-            'dni' => 'required',
-            'address' => 'required',
-            'sex' => 'required',
-            'location_id' => 'required',
-            ]);
-            
-        if($validator->fails()){
-            return response(['message'=>'Error informaciòn no válida','error' => $validator->errors()],422);
-        }
+        $data = $request->validated();
+        //verificar si la localidad ingresada existe
         $location= Location::find($data['location_id']);
-        if(!$location){
+        if(!$location){ 
             return response(['message'=>'Error, la localidad no ha sido registrada'],422);
         }
         $client = Client::create($data);
         return response([ 'client' => new ClientResource($client), 'message' => 'Creado correctamente'], 200);
-
     }
 
     //lógica mostar cliente dado id
@@ -57,6 +44,7 @@ class ClientController extends Controller
     public function update(Request $request, Client $client)
     {
        $data = $request->all();
+       //validar y permitir que sea el mismo si es su correcto actual 
         $validator = Validator::make($data, [
             'email' => 'required|email|unique:clients,email,'.$client->id.",id"
             ]);
@@ -74,7 +62,6 @@ class ClientController extends Controller
     {
         $client->is_active =false;
         $client-> save();
-
         return response(['message' => 'Eliminado']);
     }
 }

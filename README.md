@@ -11,6 +11,7 @@ Pasos necesarios
 2-Asumiendo que se tenga un gestor de datos relacional, crear una base de datos con el nombre "autosystem",
 
  con el usuario admin_system y con contraseña.
+ 
 3-crear archivo .env con los siguientes campos:
 
 ////DB_CONNECTION=mysql

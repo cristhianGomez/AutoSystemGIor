@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class AuthController extends Controller
 {
     //registro de usuarios, se añade para facilitar la creacion de usuario
-    //desabilitar ruta posteriomente
+    //se desabilitará ruta posteriomente
     public function register(Request $request)
     {
         $validatedData = $request->validate([

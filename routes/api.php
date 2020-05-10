@@ -3,8 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-//rutas para autenticacion
-Route::post('/register', 'api\AuthController@register');
+//rutas para autenticacion, registro no fue requisito por lo que se deshabilitó?
+// Route::post('/register', 'api\AuthController@register');
 Route::post('/login', 'api\AuthController@login');
 
 //rutas autenticadas

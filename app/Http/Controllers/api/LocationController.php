@@ -18,6 +18,7 @@ class LocationController extends Controller
         return response([ 'location' => LocationResource::collection($location), 'message' => 'Entregado correctamente'], 200);
     }
 
+    //crear localidad con nombre unico
     public function store(Request $request)
     {
         $data = $request->all();
@@ -39,7 +40,7 @@ class LocationController extends Controller
             'name' => 'required|unique:locations,name,'.$location->id.",id"
             ]);
         if($validator->fails()){
-            return response(['message'=>'La localidad ingresada ya existe'],422);
+            return response(['message'=>'La localidad ingresada ya no existe'],422);
         }
         $location->update($data);
         return response([ 'location' => new LocationResource($location), 'message' => 'Entregado correctamente'], 200);
