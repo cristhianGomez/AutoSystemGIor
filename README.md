@@ -26,6 +26,10 @@ Pasos necesarios
 
 ////DB_PASSWORD='contraseña
 
+<li>
+<ol>
+4-ejecutar el siguiente comando: 'composer install'
+</ol>
 4-ejecutar el siguiente comando: 'php artisan migrate' para realizar la creacion de tablas en la bd.
 
 5-ejecutar el siguiente comando: 'php artisan db:seed' para llenar la base de datos con datos de prueba.
@@ -35,7 +39,7 @@ Pasos necesarios
 7-ejecutar php artisan serve, para levantar el servidor
 
 7-Para logearse en el sistema se ha creado un usuario de prueba con las siguientes credenciales:
-
+</li>
   -email:'cristhian@company.com' 
   
   -password: 'cristhian_admin'
