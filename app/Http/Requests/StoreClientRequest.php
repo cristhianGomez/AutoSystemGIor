@@ -17,11 +17,8 @@ class StoreClientRequest extends FormRequest
     return [
             'name' => 'required|max:100',
             'lastname' => 'required|max:100',
-            'phone' => 'required|max:30',
             'email' => 'required|email|unique:clients',
-            'dni' => 'required',
-            'address' => 'required',
-            'sex' => 'required',
+            'phone' => 'required|max:30',
             'location_id' => 'required',
              ];
     }
@@ -34,9 +31,6 @@ class StoreClientRequest extends FormRequest
             'lastname.required' => 'Porfavor ingrese su apellido',
             'phone.required' => 'Porfavor ingrese su nombre',
             'email.required' => 'Porfavor ingrese su email',
-            'dni.required' => 'Porfavor ingrese su dni',
-            'address.required' => 'Porfavor ingrese su direccion',
-            'sex.required' => 'Porfavor ingrese su sexo',
             'location_id.required' => 'Porfavor ingrese su localidad',
             'name.max' => 'La cantidad maxima de caracteres del nombre es 100',
             'lastname.max' => 'La cantidad maxima de caracteres del apellido es 100',

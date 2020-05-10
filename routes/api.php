@@ -9,6 +9,7 @@ Route::post('/login', 'api\AuthController@login');
 
 //rutas autenticadas
 Route::group(['middleware' => 'auth:api'], function ($router) {
+    Route::post('/logout', 'api\AuthController@logout');
     Route::apiResource('/clients', 'api\ClientController')->except([
       'index'
       ]);

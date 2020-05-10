@@ -17,3 +17,14 @@ $yellow: #ffed4a;
 $green: #38c172;
 $teal: #4dc0b5;
 $cyan: #6cb2eb;
+
+.custom-bg-color {
+background: rgb(237,237,237);
+background: -moz-linear-gradient(left, rgb(237,237,237) 0%, rgb(246,246,246) 34%, rgb(255,255,255) 100%);
+background: -webkit-gradient(left top, right top, color-stop(0%, rgb(237,237,237)), color-stop(34%, rgb(246,246,246)), color-stop(100%, rgb(255,255,255)));
+background: -webkit-linear-gradient(left, rgb(237,237,237) 0%, rgb(246,246,246) 34%, rgb(255,255,255) 100%);
+background: -o-linear-gradient(left, rgb(237,237,237) 0%, rgb(246,246,246) 34%, rgb(255,255,255) 100%);
+background: -ms-linear-gradient(left, rgb(237,237,237) 0%, rgb(246,246,246) 34%, rgb(255,255,255) 100%);
+background: linear-gradient(to right, rgb(237,237,237) 0%, rgb(246,246,246) 34%, rgb(255,255,255) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ededed', endColorstr='#ffffff', GradientType=1 );
+}

@@ -19,9 +19,9 @@ class CreateClientsTable extends Migration
             $table->string('lastname',100);
             $table->string('phone',30);
             $table->string('email')->unique();
-            $table->string('dni');
-            $table->string('address');
-            $table->enum('sex',['M','F']);
+            $table->string('dni')->nullable();
+            $table->string('address')->nullable();
+            $table->enum('sex',['M','F'])->nullable();
             $table->boolean('is_active')->default(true);
             $table->unsignedBigInteger('location_id');
             $table->foreign('location_id')->references('id')->on('locations')->onDelete('restrict');
