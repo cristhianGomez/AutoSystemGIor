@@ -7,6 +7,7 @@
 </template>
 <script>
 import AuthForm from "../components/AuthForm.vue";
+import { message } from "../middleware/helpers";
 export default {
   name: "Login",
   components: {
@@ -20,12 +21,13 @@ export default {
       try {
         const resp = await this.$store.dispatch("loginUser", userInfo);
         this.$router.push("/clients");
+        message("Bienvenido!!", "success");
         // console.log(response);
       } catch (error) {
         if ((error.response.status = 422)) {
-          console.log("Credenciales Inválidas");
+          message("Credenciales Inválidas", "error");
         } else {
-          console.log("Hubo un error al intentar ingresar");
+          message("Hubo un error al intentar ingresar", "error");
         }
       }
     }

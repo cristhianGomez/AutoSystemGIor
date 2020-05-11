@@ -30,15 +30,15 @@ Pasos necesarios
 <ol>
 4-ejecutar el siguiente comando: 'composer install'
 </ol>
-4-ejecutar el siguiente comando: 'php artisan migrate' para realizar la creacion de tablas en la bd.
+5-ejecutar el siguiente comando: 'php artisan migrate' para realizar la creacion de tablas en la bd.
 
-5-ejecutar el siguiente comando: 'php artisan db:seed' para llenar la base de datos con datos de prueba.
+6-ejecutar el siguiente comando: 'php artisan db:seed' para llenar la base de datos con datos de prueba.
 
-6-ejecutar el siguiente comando: 'php artisan passport:client --personal' ingresar un nombre para el acceso al cliente ejem:'secret_personal_access'  
+7-ejecutar el siguiente comando: 'php artisan passport:client --personal' ingresar un nombre para el acceso al cliente ejem:'secret_personal_access'  
 
-7-ejecutar php artisan serve, para levantar el servidor
+8-ejecutar php artisan serve, para levantar el servidor
 
-7-Para logearse en el sistema se ha creado un usuario de prueba con las siguientes credenciales:
+9-Para logearse en el sistema se ha creado un usuario de prueba con las siguientes credenciales:
 </li>
   -email:'cristhian@company.com' 
   
@@ -49,6 +49,16 @@ Pasos necesarios
 
 1.ejecutar el comando npm install.
 
-2.entrar al localhost 8000.
+2.ejecutar el comando npm run dev.
 
+3.entrar al localhost 8000.
 
+<h5>HERRAMIENTAS UTILIZAS:</h5>
+1.Laravel 7 -Passport
+
+2.Mysql ,Nginx
+
+3.Vuejs, Vuex, VueRouter
+
+4.Librerias externas:
+ -Noty, Animations, Vuetify

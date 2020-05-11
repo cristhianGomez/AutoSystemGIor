@@ -7,6 +7,7 @@
 				name="main-anim"
 				enter-active-class="animated fadeInDown"
 				leave-active-class="fateOutDown"
+        mode="out-in"
 			>
       <router-view></router-view>
 			</transition>

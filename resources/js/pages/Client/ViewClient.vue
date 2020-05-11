@@ -13,24 +13,23 @@
           <v-form  lazy-validation ref="form_datos_principales">
                     <v-row class="px-5">
                   <v-col cols="12" md="12" lg="6">
-                      <v-text-field color="base" outlined v-model="data.name" label="Nombres" counter="100"
+                      <v-text-field color="base" outlined v-model="clientData.name" label="Nombres" counter="100"
                         clearable :rules="validateRules.max100Rule"></v-text-field>
                   </v-col> 
                   <v-col cols="12" md="12" lg="6">
-                      <v-text-field color="base" outlined v-model="data.lastname" label="Apellidos" counter="100"
+                      <v-text-field color="base" outlined v-model="clientData.lastname" label="Apellidos" counter="100"
                         clearable :rules="validateRules.max100Rule"></v-text-field>
                   </v-col> 
                   <v-col cols="12" md="12" lg="6">
-                      <v-text-field color="base" outlined v-model="data.email" label="Localidad" 
-                        clearable :rules="validateRules.requiredRule"></v-text-field>
+                       <v-select :items="locations" v-model="clientData.location_id" label="Seleccione localidad" outlined></v-select>
                   </v-col>
                   <v-col cols="12" md="12" lg="6">
-                      <v-text-field color="base" outlined v-model="data.phone" label="Celular" counter="30" 
+                      <v-text-field color="base" outlined v-model="clientData.phone" label="Celular" counter="30" 
                         clearable :rules="validateRules.max30Rule"></v-text-field>
                   </v-col>
                   <v-col cols="12" md="12" lg="6">
-                      <v-text-field color="base" outlined v-model="data.email" label="Email" 
-                        clearable :rules="validateRules.requiredRule"></v-text-field>
+                      <v-text-field color="base" outlined v-model="clientData.email" label="Email" 
+                        clearable :rules="validateRules.emailRule"></v-text-field>
                   </v-col>
                 </v-row>
                 <v-row>
@@ -53,15 +52,15 @@
         <v-expansion-panel-content>
               <v-row class="px-5">
                 <v-col cols="12" md="12" lg="12">
-                    <v-text-field color="base" outlined v-model="data.dni" label="D.N.I." 
+                    <v-text-field color="base" outlined v-model="clientData.dni" label="D.N.I." 
                        clearable></v-text-field>
                 </v-col>
                 <v-col cols="12" md="12" lg="12">
-                    <v-text-field color="base" outlined v-model="data.address" label="Dirección" 
+                    <v-text-field color="base" outlined v-model="clientData.address" label="Dirección" 
                        clearable></v-text-field>
                 </v-col>
                 <v-col cols="12" md="12" lg="12">
-                    <v-text-field color="base" outlined v-model="data.sex" label="Sexo" 
+                    <v-text-field color="base" outlined v-model="clientData.sex" label="Sexo" 
                        clearable></v-text-field>
                 </v-col>
                   </v-row>
@@ -75,11 +74,30 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   name: "ViewClient",
+  async mounted() {
+    await this.$store.dispatch("locations/getLocations");
+    const client_id = this.$route.params.id;
+    if (client_id) {
+      try {
+        this.clientData = await this.$store.dispatch(
+          "clients/getClient",
+          client_id
+        );
+        this.btnAction = "Editar Cliente";
+        this.edit = true;
+      } catch (error) {
+        this.$router.push("/clients");
+      }
+    }
+  },
   data: () => ({
     lazy: true,
-    data: {},
+    edit: false,
+    clientData: {},
     btnAction: "Crear Cliente",
     panel: [0, 1],
     validateRules: {
@@ -92,11 +110,41 @@ export default {
       max30Rule: [
         v => !!v || "El campo es requerido",
         v => (v && v.length <= 30) || "El campo solo puede tener 30 caracteres"
+      ],
+      emailRule: [
+        v => !!v || "El campo es requerido",
+        v => /.+@.+\..+/.test(v) || "No es un email válido."
       ]
     }
   }),
+  computed: {
+    ...mapGetters({
+      locations: "locations/options"
+    })
+  },
   methods: {
-    btnClicked() {}
+    async btnClicked() {
+      if (this.$refs.form_datos_principales.validate()) {
+        try {
+          if (this.edit) {
+            const editValues = {
+              payload: this.clientData,
+              id: this.$route.params.id
+            };
+            delete editValues.payload.location;
+            await this.$store.dispatch("clients/updateClient", editValues);
+            this.$router.push("/clients");
+          } else {
+            const client = this.clientData;
+            // delete client.payload.location;
+            await this.$store.dispatch("clients/createClient", client);
+            this.$router.push("/clients");
+          }
+        } catch (e) {
+          console.log(e);
+        }
+      }
+    }
   }
 };
 </script>

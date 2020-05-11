@@ -1,6 +1,11 @@
 <template>
-  <v-navigation-drawer v-model="drawer" clipped app>
-      <v-subheader class="subtitle-2 font-weight-bold">GESTIÓN DE CLIENTES</v-subheader>
+  <v-navigation-drawer v-if="isLoggedIn" v-model="drawer" clipped app>
+      <v-subheader class="subtitle-2 font-weight-bold">GESTIÓN DE CLIENTES
+              <v-btn color="primary"  class="mt-5" @click="drawer=false" dark x-small absolute top
+                right fab>
+                <v-icon>mdi-arrow-left-bold-circle</v-icon>
+              </v-btn>
+      </v-subheader>
       <v-list shaped>
          <v-list-item-group v-model="selectedItem" color="primary">
    <v-list-item v-for="item in menuItems" :key="item.name" :to="item.to">
@@ -14,7 +19,8 @@
   </v-navigation-drawer>
 </template>
 <script>
-import { mapState } from "vuex";
+import { mapState, mapGetters } from "vuex";
+
 export default {
   name: "TheSideBar",
   data: () => ({
@@ -26,11 +32,12 @@ export default {
     selectedItem: 0
   }),
   computed: {
-    ...mapState({ drawerState: "drawerState" })
+    ...mapState({ drawerState: "drawerState" }),
+    ...mapGetters(["isLoggedIn"])
   },
   watch: {
     drawerState() {
-      this.drawer = this.drawerState;
+      this.drawer = true;
     }
   }
 };

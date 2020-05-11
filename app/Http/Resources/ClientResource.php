@@ -11,13 +11,14 @@ class ClientResource extends JsonResource
          return [
         'id' => $this->id,
         'name' => $this->name,
-        'lastºname' => $this->lastºname,
+        'lastname' => $this->lastname,
         'phone' => $this->phone,
         'email' => $this->email,
         'dni' => $this->dni,
         'address' => $this->address,
         'sex' => $this->sex,
         'location' => $this->location->name,
+        'location_id' => $this->location_id,
         'updated_at' => $this->updated_at,
     ];
     }

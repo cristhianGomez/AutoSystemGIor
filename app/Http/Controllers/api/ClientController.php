@@ -48,7 +48,7 @@ class ClientController extends Controller
         $validator = Validator::make($data, [
             'email' => 'required|email|unique:clients,email,'.$client->id.",id"
             ]);
-        if($validator->fails()){
+            if($validator->fails()){
             return response(['message'=>'El email ingresado ya existe'],422);
         }
      

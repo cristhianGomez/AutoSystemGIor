@@ -1,7 +1,7 @@
 <template>
   <div>
-    <h1 class="title">Not Fou11nd</h1>
-    <p>Woops! Looks like the page you requested cannot be found.</p>
+    <h1 class="title">No Ecnontrado!</h1>
+    <p>Upss! Al parecer la pagina que buscas no existe.</p>
   </div>
 </template>
 

@@ -53,11 +53,10 @@ export default {
   methods: {
     validate() {
       this.emailRules = [
-        v => !!v || "El e-mail es requerido.",
-        v => /.+@.+\..+/.test(v) || "No es un e-mail válido."
+        v => !!v || "El email es requerido.",
+        v => /.+@.+\..+/.test(v) || "No es un email válido."
       ];
-      this.$refs.form.validate();
-      this.$emit("validData", this.userInfo);
+      this.$refs.form.validate() && this.$emit("validData", this.userInfo);
     }
   }
 };

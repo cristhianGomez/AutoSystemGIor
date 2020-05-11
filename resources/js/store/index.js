@@ -1,6 +1,8 @@
 import axios from 'axios';
+import { message } from "../middleware/helpers";
 import {getLocalUser,setAuthorization} from '../middleware/init.config'
 import {clients} from './clients'
+import {locations} from './locations'
 
 const user = getLocalUser()
 
@@ -30,8 +32,23 @@ const store = {
     },
     SET_DRAWER(state){
       state.drawerState = !state.drawerState
-    }
-  },
+    },
+    SET_ERROR(state,error){
+      const msg = error.response.data
+      state.lastError = msg
+      if(msg.errors){
+          Object.keys(msg.errors).map((r)=>{
+            if(r == 'email'){
+              message(`El ${r} ya esta siendo utilizado`,'error')
+            }else{
+              message(`El campo ${r} no cumple lo requisitos`,'error')
+            }            
+          })
+      }else{
+      message(error.response.data.message,'error')
+      }
+      }
+      },
   actions: {
     loginUser({commit},credentials){
       return new Promise((resolve,reject)=>{
@@ -59,7 +76,8 @@ const store = {
     }
   },
   modules:{
-    clients
+    clients,
+    locations
   }
 }
 
