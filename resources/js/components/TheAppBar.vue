@@ -7,9 +7,9 @@
     hide-on-scroll
     clipped-left
   >
-    <v-tooltip bottom>
+    <v-tooltip v-if="isLoggedIn" bottom>
       <template v-slot:activator="{ on }">
-        <v-app-bar-nav-icon v-if="isLoggedIn" v-on="on" @click="setDrawer"></v-app-bar-nav-icon>
+        <v-app-bar-nav-icon v-on="on" @click="setDrawer"></v-app-bar-nav-icon>
       </template>
       <span>Abrir Menu</span>
     </v-tooltip>
